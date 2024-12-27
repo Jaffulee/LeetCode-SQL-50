@@ -4,7 +4,9 @@ SELECT ATime.machine_id
 FROM (
     SELECT A.machine_id
             ,A.process_id
-            ,MAX(A.timestamp)-MIN(A.timestamp) AS processing_time
+            ,SUM(CASE A.activity_type 
+                    WHEN 'end' THEN A.timestamp ELSE -A.timestamp 
+                END) AS processing_time
             FROM Activity as A
             GROUP BY A.process_id, A.machine_id
 ) AS ATime
