@@ -15,4 +15,4 @@ INNER JOIN (
     GROUP BY d.customer_id
     ) AS m
 ON Delivery.customer_id = m.customer_id
-WHERE Delivery.order_date=m.first_order
+AND Delivery.order_date=m.first_order
