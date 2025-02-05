@@ -7,7 +7,5 @@ FROM (
 ) AS l
 WHERE l.consecutive_flag
 
--- select lead(num) over (partition by lol order by id),lead(num,2) over (order by id), id,num from 
-
 
 
