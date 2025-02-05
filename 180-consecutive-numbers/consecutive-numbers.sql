@@ -1,7 +1,13 @@
 # Write your MySQL query statement below
-SELECT DISTINCT l0.num AS ConsecutiveNums
-FROM Logs AS l0
-INNER JOIN Logs AS l2
-ON l0.id = l2.id - 2 AND l0.num = l2.num
-INNER JOIN Logs as l1
-ON l0.id = l1.id - 1 AND l0.num = l1.num
+SELECT DISTINCT l.num AS ConsecutiveNums
+FROM (
+    SELECT l1.num,
+            l1.num = LEAD(l1.num) OVER (ORDER BY l1.id) AND l1.num = LEAD(l1.num,2) OVER (ORDER BY l1.id) AS consecutive_flag
+    FROM Logs AS l1
+) AS l
+WHERE l.consecutive_flag
+
+-- select lead(num) over (partition by lol order by id),lead(num,2) over (order by id), id,num from 
+
+
+
